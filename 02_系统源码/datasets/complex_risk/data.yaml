@@ -1,0 +1,10 @@
+path: /Users/fahim/Desktop/云筑天瞳V9/02_系统源码/datasets/complex_risk
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 3
+names:
+  0: wall_crack
+  1: material_stack
+  2: edge_guardrail

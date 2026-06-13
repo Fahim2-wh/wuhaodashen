@@ -1,0 +1,735 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>云筑天瞳 V9 一键启动正式版</title>
+<style>
+:root{--bg:#06111f;--p:#0e223b;--p2:#102b4a;--line:rgba(80,190,255,.25);--b:#35d6ff;--g:#f4c66b;--r:#ff5578;--ok:#43e6a8;--txt:#eef7ff;--m:#8fa8c3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,rgba(53,214,255,.18),transparent 30%),linear-gradient(160deg,#050914,#07172a 60%,#06111f);color:var(--txt);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.hide{display:none!important}.login{max-width:460px;margin:7vh auto;padding:24px}.wrap{display:grid;grid-template-columns:265px 1fr;min-height:100vh}.side{background:rgba(4,11,22,.85);backdrop-filter:blur(14px);border-right:1px solid var(--line);padding:22px;position:sticky;top:0;height:100vh;z-index:5}.main{padding:24px 28px 50px}
+.card{background:linear-gradient(180deg,rgba(16,43,74,.92),rgba(8,20,36,.92));border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.32);position:relative;overflow:hidden}.card:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--b),transparent)}
+.logo{display:flex;gap:12px;align-items:center;margin-bottom:22px}.mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--b),#196bff,var(--g));box-shadow:0 0 28px rgba(53,214,255,.35)}h1,h2,h3{margin-top:0}.logo h1{font-size:19px;margin:0}.logo p,.muted{color:var(--m);font-size:13px;line-height:1.7}.nav button{width:100%;border:1px solid transparent;background:transparent;color:#cbe0f5;padding:13px 14px;border-radius:14px;margin:4px 0;text-align:left;cursor:pointer}.nav button.on,.nav button:hover{background:rgba(53,214,255,.12);border-color:rgba(53,214,255,.26);color:white}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.top h2{margin:0;font-size:28px}.top p{margin:6px 0 0;color:var(--m)}
+.grid{display:grid;gap:16px}.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.btn{border:1px solid rgba(53,214,255,.36);background:rgba(53,214,255,.1);color:white;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}.btn.g{border-color:rgba(244,198,107,.42);background:rgba(244,198,107,.12);color:#ffe2a2}.btn.r{border-color:rgba(255,85,120,.42);background:rgba(255,85,120,.1)}
+input,select,textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:13px;color:white;padding:11px;outline:none}option{color:#111}textarea{min-height:105px;resize:vertical}.sec{display:none;animation:f .25s ease}.sec.on{display:block}@keyframes f{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+.metric b{font-size:34px;display:block;margin:8px 0}.metric span{color:var(--m)}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:13px}th{background:rgba(53,214,255,.09)}
+.risk{padding:12px;border-radius:14px;margin:9px 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}.risk.高{border-color:rgba(255,85,120,.5);background:rgba(255,85,120,.08)}.risk.中{border-color:rgba(244,198,107,.45);background:rgba(244,198,107,.07)}.risk.低{border-color:rgba(67,230,168,.35);background:rgba(67,230,168,.06)}
+.preview{display:grid;grid-template-columns:1fr 400px;gap:16px}.imgbox{background:#06111f;border:1px solid var(--line);border-radius:18px;overflow:hidden;min-height:330px;display:flex;align-items:center;justify-content:center}.imgbox img{max-width:100%;display:block}.thumb{height:90px;border-radius:10px;border:1px solid var(--line);object-fit:cover}
+.chat{height:410px;overflow:auto;border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(0,0,0,.17)}.msg{max-width:82%;padding:12px 14px;border-radius:16px;margin:10px 0;white-space:pre-wrap;line-height:1.7}.msg.u{margin-left:auto;background:rgba(53,214,255,.14);border:1px solid rgba(53,214,255,.28)}.msg.a{background:rgba(244,198,107,.09);border:1px solid rgba(244,198,107,.22)}
+.pill{display:inline-block;border:1px solid rgba(53,214,255,.3);padding:6px 10px;border-radius:999px;margin:3px;color:#dff7ff;background:rgba(53,214,255,.08)}
+@media(max-width:950px){.wrap{grid-template-columns:1fr}.side{height:auto;position:relative}.c2,.c3,.c4,.preview{grid-template-columns:1fr}.main{padding:18px}}
+</style>
+
+
+<!-- APPLE_UI_UPGRADE_START -->
+<style>
+:root{
+  --apple-bg:#f5f7fb;
+  --apple-panel:rgba(255,255,255,.72);
+  --apple-panel-strong:rgba(255,255,255,.86);
+  --apple-line:rgba(20,30,50,.08);
+  --apple-text:#111827;
+  --apple-sub:#6b7280;
+  --apple-blue:#007aff;
+  --apple-cyan:#5ac8fa;
+  --apple-green:#34c759;
+  --apple-red:#ff3b30;
+  --apple-orange:#ff9500;
+}
+
+/* 整体 Apple 浅色背景 */
+html,body{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(0,122,255,.13), transparent 30%),
+    radial-gradient(circle at 92% 12%, rgba(90,200,250,.18), transparent 32%),
+    radial-gradient(circle at 40% 100%, rgba(175,220,255,.20), transparent 28%),
+    linear-gradient(135deg,#f8fbff 0%,#f2f6fb 42%,#ffffff 100%) !important;
+  color:var(--apple-text) !important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif !important;
+}
+
+/* 去掉原来的深色科技网格 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.06));
+}
+
+/* 左侧栏 Apple 玻璃侧栏 */
+aside,.sidebar,.left,.sider,[class*="sidebar"]{
+  background:rgba(255,255,255,.68) !important;
+  backdrop-filter:blur(34px) saturate(180%) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(180%) !important;
+  border-right:1px solid rgba(20,30,50,.08) !important;
+  box-shadow:20px 0 70px rgba(30,60,100,.08) !important;
+  color:var(--apple-text) !important;
+}
+
+/* 主内容区域 */
+main,.main,.content,[class*="content"]{
+  color:var(--apple-text) !important;
+}
+
+/* 所有卡片改 Apple 毛玻璃 */
+.card,.panel,.box,.module,.section,.content-card,
+[class*="card"],[class*="panel"]{
+  background:var(--apple-panel) !important;
+  backdrop-filter:blur(30px) saturate(170%) !important;
+  -webkit-backdrop-filter:blur(30px) saturate(170%) !important;
+  border:1px solid rgba(255,255,255,.78) !important;
+  border-radius:28px !important;
+  box-shadow:
+    0 22px 60px rgba(31,59,97,.10),
+    0 2px 8px rgba(31,59,97,.04),
+    inset 0 1px 0 rgba(255,255,255,.75) !important;
+  color:var(--apple-text) !important;
+}
+
+/* 统计数字卡片更干净 */
+[class*="stat"],[class*="metric"]{
+  background:rgba(255,255,255,.78) !important;
+  border-radius:28px !important;
+}
+
+/* 标题 Apple 风格 */
+h1,h2,h3{
+  color:#111827 !important;
+  letter-spacing:-.03em !important;
+  font-weight:800 !important;
+}
+
+h1{
+  font-size:38px !important;
+  line-height:1.1 !important;
+  background:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+  color:#111827 !important;
+}
+
+h2{
+  font-size:25px !important;
+}
+
+h3{
+  font-size:20px !important;
+}
+
+/* 正文文字 */
+p,span,div,label{
+  color:inherit;
+}
+
+/* 次级说明文字统一灰 */
+small,.muted,.sub,.desc,[class*="subtitle"],[class*="desc"]{
+  color:var(--apple-sub) !important;
+}
+
+/* 菜单按钮 Apple 风格 */
+nav button, aside button, .menu-item, [class*="menu"] button{
+  background:transparent !important;
+  border:1px solid transparent !important;
+  color:#374151 !important;
+  border-radius:16px !important;
+  font-weight:650 !important;
+  transition:all .18s ease !important;
+}
+
+nav button:hover, aside button:hover, .menu-item:hover, [class*="menu"] button:hover{
+  background:rgba(0,122,255,.08) !important;
+  border-color:rgba(0,122,255,.12) !important;
+  color:#007aff !important;
+  transform:translateX(2px);
+}
+
+/* 当前选中菜单 */
+nav button.active, aside button.active, .active, [aria-current="page"]{
+  background:rgba(0,122,255,.12) !important;
+  color:#007aff !important;
+  border-color:rgba(0,122,255,.18) !important;
+}
+
+/* 输入框 */
+input,select,textarea{
+  background:rgba(255,255,255,.78) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border:1px solid rgba(20,30,50,.10) !important;
+  color:#111827 !important;
+  border-radius:18px !important;
+  outline:none !important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.03) !important;
+}
+
+input::placeholder,textarea::placeholder{
+  color:#9ca3af !important;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(0,122,255,.55) !important;
+  box-shadow:
+    0 0 0 4px rgba(0,122,255,.13),
+    inset 0 1px 2px rgba(0,0,0,.03) !important;
+}
+
+/* Apple 蓝色主按钮 */
+button{
+  transition:all .18s ease !important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif !important;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+button[type="submit"],
+.primary,
+.btn-primary{
+  background:linear-gradient(180deg,#0a84ff,#007aff) !important;
+  color:white !important;
+  border:none !important;
+  border-radius:16px !important;
+  box-shadow:0 10px 26px rgba(0,122,255,.24) !important;
+}
+
+/* 顶部右侧按钮：刷新、上传巡检 */
+button:has(+ button), .toolbar button{
+  border-radius:16px !important;
+}
+
+/* 图片区域 */
+img{
+  border-radius:22px !important;
+}
+
+/* 检测图片容器更加 Apple 相册感 */
+img[src*="annotated"], img[src*="uploads"]{
+  box-shadow:0 20px 60px rgba(0,0,0,.12) !important;
+  border:1px solid rgba(255,255,255,.85) !important;
+}
+
+/* 风险卡片 */
+.risk-card,.ai-result-card,[class*="risk"],[class*="result"]{
+  background:rgba(255,255,255,.80) !important;
+  border:1px solid rgba(20,30,50,.08) !important;
+  border-radius:22px !important;
+  box-shadow:0 12px 36px rgba(31,59,97,.08) !important;
+  color:#111827 !important;
+}
+
+/* 状态胶囊 */
+.badge,.tag,.pill,[class*="badge"],[class*="tag"],[class*="pill"]{
+  background:rgba(0,122,255,.10) !important;
+  color:#007aff !important;
+  border:1px solid rgba(0,122,255,.16) !important;
+  border-radius:999px !important;
+}
+
+/* 安全声明卡片 */
+.safety-card,.safe-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(240,248,255,.72)) !important;
+  border:1px solid rgba(0,122,255,.12) !important;
+  color:#111827 !important;
+}
+
+/* 左上角 Logo */
+.yzt-logo-img,.yzt-brand-logo{
+  width:58px !important;
+  height:58px !important;
+  object-fit:contain !important;
+  border-radius:18px !important;
+  padding:8px !important;
+  background:rgba(255,255,255,.90) !important;
+  box-shadow:
+    0 14px 32px rgba(0,122,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* 品牌文字 */
+.yzt-brand-title{
+  color:#111827 !important;
+  font-weight:850 !important;
+  letter-spacing:-.03em !important;
+}
+
+/* 右下角 AI按钮：Apple 浮动按钮 */
+#qwenSimpleBtn{
+  background:linear-gradient(180deg,#0a84ff,#007aff) !important;
+  color:#fff !important;
+  border:none !important;
+  border-radius:22px !important;
+  padding:16px 24px !important;
+  font-size:16px !important;
+  font-weight:800 !important;
+  box-shadow:
+    0 18px 45px rgba(0,122,255,.30),
+    inset 0 1px 0 rgba(255,255,255,.32) !important;
+}
+
+#qwenSimpleBtn::before{
+  content:"✨ ";
+}
+
+/* 退出按钮保留红色但更 Apple */
+button[style*="red"], .logout, [class*="logout"]{
+  background:rgba(255,59,48,.10) !important;
+  color:#ff3b30 !important;
+  border:1px solid rgba(255,59,48,.18) !important;
+}
+
+/* 页面整体间距更大 */
+main,.main,.content{
+  padding:32px !important;
+}
+
+/* 表格 */
+table{
+  background:rgba(255,255,255,.72) !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+}
+
+th,td{
+  border-color:rgba(20,30,50,.07) !important;
+  color:#111827 !important;
+}
+
+/* 滚动条 Apple 风格 */
+::-webkit-scrollbar{
+  width:10px;
+  height:10px;
+}
+::-webkit-scrollbar-thumb{
+  background:rgba(100,116,139,.28);
+  border-radius:999px;
+}
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+</style>
+<!-- APPLE_UI_UPGRADE_END -->
+
+</head><body>
+<div id="auth" class="login card">
+<h1 style="font-size:34px;background:linear-gradient(90deg,#fff,#78e8ff,#ffd985);-webkit-background-clip:text;color:transparent">云筑天瞳 V8</h1>
+<p class="muted">一键启动试点演示版｜支持本地图像分析，预留真实 YOLO 模型接口，可用于项目路演、试点演示与安全台账管理。</p>
+<div id="loginBox"><input id="lu" placeholder="用户名 默认 admin"><br><br><input id="lp" type="password" placeholder="密码 默认 admin123456"><br><br><button class="btn g" onclick="login()">登录</button> <button class="btn" onclick="toggleReg(true)">注册</button><p class="muted">默认：admin / admin123456</p></div>
+<div id="regBox" class="hide"><input id="ru" placeholder="用户名"><br><br><input id="rp" type="password" placeholder="密码至少6位"><br><br><select id="rr"><option>安全员</option><option>项目负责人</option><option>监理人员</option><option>政府监管人员</option><option>专家/工程师</option></select><br><br><input id="ro" placeholder="单位"><br><br><input id="rphone" placeholder="手机号"><br><br><button class="btn g" onclick="register()">完成注册</button> <button class="btn" onclick="toggleReg(false)">返回登录</button></div>
+</div>
+<div id="app" class="wrap hide">
+<aside class="side"><div class="logo"><div class="mark"></div><div><h1>云筑天瞳 V8</h1><p id="userLine">真实YOLO识别</p></div></div><div class="nav" id="nav"></div><div class="card" style="margin-top:18px;padding:14px"><b>安全声明</b><p class="muted">AI识别只作辅助。高风险隐患必须由安全员、监理或专业工程师复核。</p><button class="btn r" onclick="logout()">退出</button></div></aside>
+<main class="main"><div class="top"><div><h2 id="title">运营驾驶舱</h2><p id="sub">真实YOLO检测、隐患闭环与报告归档</p></div><div><button class="btn" onclick="loadAll()">刷新</button><button class="btn g" onclick="go('inspect')">上传巡检</button></div></div>
+
+<section id="dashboard" class="sec on" data-title="运营驾驶舱" data-sub="真实YOLO检测、隐患闭环与报告归档">
+<div class="grid c4"><div class="card metric"><span>项目数</span><b id="mProjects">0</b></div><div class="card metric"><span>隐患总数</span><b id="mRisks">0</b></div><div class="card metric"><span>高风险</span><b id="mHigh">0</b></div><div class="card metric"><span>待处理</span><b id="mPending">0</b></div></div>
+<div class="grid c2" style="margin-top:16px"><div class="card"><h3>AI引擎状态</h3><div id="sysStatus" class="muted">正在读取...</div></div><div class="card"><h3>试点演示说明</h3><p class="muted">当前版本可直接进行 AI巡检、隐患闭环、CSV台账和PDF报告导出；未放入真实模型时为试点演示模式。后续把训练好的模型放入 models/site_safety.pt 后，系统会自动升级为真实YOLO识别模式。</p></div></div></section>
+
+<section id="projects" class="sec" data-title="项目管理" data-sub="创建和管理工地项目"><div class="card"><h3>新建项目</h3><div class="grid c4"><input id="pname" placeholder="项目名称"><input id="ploc" placeholder="地点"><select id="pcat"><option>房建工程</option><option>道路工程</option><option>桥梁工程</option><option>老旧房屋修缮</option></select><input id="powner" placeholder="负责人/单位"></div><br><button class="btn g" onclick="createProject()">创建项目</button></div><div class="card" style="margin-top:16px"><h3>项目列表</h3><div id="projectList"></div></div></section>
+
+<section id="inspect" class="sec" data-title="AI巡检 / 真实YOLO识别" data-sub="上传真实工地照片，YOLO检测目标并自动生成隐患单"><div class="card"><div class="grid c3"><select id="inspectProject"></select><input id="inspectTitle" placeholder="巡检标题"><select id="inspectMode"><option value="site">施工现场安全YOLO</option><option value="crack">裂缝/结构病害YOLO</option></select></div><br><textarea id="inspectDesc" placeholder="现场说明：位置、楼层、作业内容、发现情况等"></textarea><br><br><input id="inspectImage" type="file" accept="image/*"> <button class="btn g" onclick="uploadInspection()">上传并识别</button></div><div id="inspectResult" style="margin-top:16px"></div><div class="card" style="margin-top:16px"><h3>最近巡检</h3><div id="inspectionList"></div></div></section>
+
+<section id="risks" class="sec" data-title="隐患整改闭环" data-sub="派单、整改、复查、归档"><div class="card"><h3>隐患台账</h3><button class="btn" onclick="location.href='/api/export/risks.csv'">导出CSV台账</button><div id="riskList"></div></div></section>
+
+<section id="agent" class="sec" data-title="AI安全员" data-sub="安全问答与整改建议"><div class="card"><div id="chat" class="chat"><div class="msg a">你好，我是云筑天瞳AI安全员。请描述现场隐患，我会给出辅助建议。</div></div><br><textarea id="q" placeholder="例如：YOLO检测到未戴安全帽和临边风险，怎么处理？"></textarea><br><br><button class="btn g" onclick="ask()">发送</button></div></section>
+
+
+
+
+
+
+
+
+
+<section id="twin" class="sec" data-title="数字乡村孪生建设平台" data-sub="乡村建筑资产、工程安全态势与隐患治理一张图">
+  <div class="grid c3">
+    <div class="card">
+      <h3>乡村建筑资产库</h3>
+      <p class="muted">围绕村庄公共建筑、农房改造、道路桥涵、施工点位建立数字化档案，形成“一村一图、一房一档、一险一单”。</p>
+      <div class="pill">建筑档案：128 栋</div>
+      <div class="pill">重点监管：23 处</div>
+      <div class="pill">高风险点：6 处</div>
+    </div>
+    <div class="card">
+      <h3>安全治理数据底座</h3>
+      <p class="muted">融合现场照片、YOLO识别结果、隐患台账、整改记录、结构评估结果，形成乡村建设安全态势总览。</p>
+      <div class="pill">AI巡检数据</div>
+      <div class="pill">隐患闭环数据</div>
+      <div class="pill">结构安全数据</div>
+    </div>
+    <div class="card">
+      <h3>风险态势总览</h3>
+      <div class="risk high"><b>红色风险区</b><p class="muted">老旧房屋改造区、临边作业区、疑似沉降建筑</p></div>
+      <div class="risk mid"><b>黄色关注区</b><p class="muted">材料堆放区、临时用电区、轻微裂缝建筑</p></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>数字孪生安全治理流程</h3>
+    <p class="muted">现场采集 → AI识别 → 风险定位 → 结构安全计算 → 隐患派单 → 整改复查 → 报告归档 → 村镇治理档案</p>
+  </div>
+</section>
+
+<section id="abaqus" class="sec" data-title="结构安全轻量化仿真系统" data-sub="面向乡村建筑安全的快速计算、风险评估与ABAQUS接口预留">
+  <div class="card">
+    <h3>建筑结构安全计算参数</h3>
+    <p class="muted">当前版本使用轻量结构安全计算引擎，可对老旧农房、砖混结构、钢筋混凝土建筑进行快速安全评估；后续可接入 ABAQUS 工业求解器。</p>
+    <div class="grid c3">
+      <select id="abType">
+        <option value="masonry">砖混结构</option>
+        <option value="concrete">钢筋混凝土结构</option>
+        <option value="steel">钢结构</option>
+        <option value="wood">木结构 / 老旧农房</option>
+      </select>
+      <input id="abFloors" type="number" value="2" placeholder="建筑层数">
+      <input id="abAge" type="number" value="18" placeholder="建筑年限">
+      <input id="abCrack" type="number" value="1.2" step="0.1" placeholder="最大裂缝宽度 mm">
+      <input id="abLoad" type="number" value="0.8" step="0.1" placeholder="附加荷载系数">
+      <select id="abFoundation">
+        <option value="good">地基情况：较好</option>
+        <option value="normal">地基情况：一般</option>
+        <option value="poor">地基情况：疑似沉降</option>
+      </select>
+    </div>
+    <br>
+    <button class="btn g" onclick="runAbaqusSim()">一键结构安全计算</button>
+    <button class="btn" onclick="fillDemoAbaqus()">填入高风险示例</button>
+
+    <div class="card" style="margin-top:16px;background:rgba(5,18,35,.55)">
+      <h3>参数说明</h3>
+      <div class="grid c3">
+        <div class="risk">
+          <b>结构类型</b>
+          <p class="muted">选择建筑主体结构形式，例如砖混结构、钢筋混凝土结构、钢结构、木结构/老旧农房。不同结构的抗震、承载和老化风险不同。</p>
+        </div>
+        <div class="risk">
+          <b>建筑层数</b>
+          <p class="muted">表示建筑总层数。层数越高，结构受力越复杂，墙体、梁板和基础承受压力更大，风险评分会相应提高。</p>
+        </div>
+        <div class="risk">
+          <b>建筑年限</b>
+          <p class="muted">表示建筑已使用年数。年限越长，可能存在材料老化、墙体开裂、构件耐久性下降、基础沉降等问题。</p>
+        </div>
+        <div class="risk">
+          <b>最大裂缝宽度 mm</b>
+          <p class="muted">表示现场观测到的最大裂缝宽度，单位为毫米。裂缝越宽，说明墙体、梁板或结构连接部位可能存在更明显的受力异常。</p>
+        </div>
+        <div class="risk">
+          <b>附加荷载系数</b>
+          <p class="muted">表示建筑额外承受的压力大小。1.0 为正常荷载，1.2 为略高，1.4 为较高，1.6 以上通常需要重点关注。</p>
+        </div>
+        <div class="risk">
+          <b>地基情况</b>
+          <p class="muted">表示基础状态。若存在疑似沉降，可能出现墙体斜裂缝、门窗变形、地面下沉、房屋局部倾斜等风险。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="abaqusResult" style="margin-top:16px"></div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>系统定位</h3>
+    <p class="muted">
+      本模块不是简单展示图，而是根据结构类型、建筑年限、裂缝宽度、荷载系数、地基情况进行轻量化安全计算，
+      输出风险评分、应力比、最大位移估算、安全系数和整改建议。后续可通过 Abaqus Python 接口升级为工业级有限元求解。
+    </p>
+  </div>
+</section>
+
+<section id="report" class="sec" data-title="报告中心" data-sub="导出项目AI安全巡检报告"><div class="card"><select id="reportProject"></select><br><br><button class="btn g" onclick="downloadReport()">生成并下载PDF报告</button></div></section>
+<section id="users" class="sec" data-title="用户管理" data-sub="超级管理员可查看用户"><div class="card"><div id="userList"></div></div></section>
+<section id="logs" class="sec" data-title="操作日志" data-sub="追踪登录、上传、整改和报告导出"><div class="card"><div id="logList"></div></div></section>
+</main></div>
+<script>
+const tabs=[
+["dashboard","运营驾驶舱"],
+["projects","项目管理"],
+["inspect","AI巡检"],
+["risks","隐患闭环"],
+["twin","数字乡村孪生"],
+["abaqus","结构安全仿真"],
+["agent","AI安全员"],
+["report","报告中心"],
+["users","用户管理"],
+["logs","操作日志"]
+];
+let projects=[],risks=[],inspections=[],me=null;
+function $(id){return document.getElementById(id)} function fd(o){const f=new FormData();Object.entries(o).forEach(([k,v])=>f.append(k,v));return f}
+async function api(url,opt={}){const r=await fetch(url,opt); if(!r.ok){throw new Error(await r.text())} const ct=r.headers.get("content-type")||""; return ct.includes("json")?r.json():r}
+function toggleReg(v){$("regBox").classList.toggle("hide",!v);$("loginBox").classList.toggle("hide",v)}
+async function register(){try{await api("/api/register",{method:"POST",body:fd({username:$("ru").value,password:$("rp").value,role:$("rr").value,org:$("ro").value,phone:$("rphone").value})});alert("注册成功，请登录");toggleReg(false)}catch(e){alert(e.message)}}
+async function login(){try{let d=await api("/api/login",{method:"POST",body:fd({username:$("lu").value||"admin",password:$("lp").value||"admin123456"})});me=d.user;showApp()}catch(e){alert("登录失败："+e.message)}}
+async function logout(){await fetch("/api/logout",{method:"POST"});location.reload()}
+async function check(){try{me=await api("/api/me");showApp()}catch(e){}}
+function showApp(){$("auth").classList.add("hide");$("app").classList.remove("hide");$("userLine").innerText=`${me.username}｜${me.role}`;$("nav").innerHTML=tabs.map((t,i)=>`<button class="${i==0?'on':''}" onclick="go('${t[0]}')">${t[1]}</button>`).join("");loadAll()}
+function go(id){document.querySelectorAll(".sec").forEach(s=>s.classList.remove("on"));$(id).classList.add("on");document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("on"));[...document.querySelectorAll(".nav button")][tabs.findIndex(t=>t[0]==id)].classList.add("on");$("title").innerText=$(id).dataset.title;$("sub").innerText=$(id).dataset.sub;if(id=="logs")loadLogs();if(id=="users")loadUsers()}
+async function loadAll(){await loadDashboard();await loadSystem();await loadProjects();await loadRisks();await loadInspections()}
+async function loadSystem(){try{let s=await api("/api/system");let mode=s.demo_mode?"试点演示模式":"真实YOLO识别模式";$("sysStatus").innerHTML=`<span class="pill">运行状态：已启动</span><span class="pill">AI模式：${mode}</span><span class="pill">ultralytics：${s.yolo_installed?'已安装':'可选'}</span><span class="pill">工地模型：${s.site_model_exists?'已接入':'未接入，演示模式可用'}</span><span class="pill">AI安全员：${s.deepseek_configured?'DeepSeek在线模式':'本地辅助模式'}</span><p class="muted">当前系统可直接演示：上传巡检照片 → AI分析 → 自动生成隐患 → 整改闭环 → CSV/PDF报告。<br>真实YOLO模型路径：${s.site_model}</p>`}catch(e){}}
+async function loadDashboard(){let d=await api("/api/dashboard");$("mProjects").innerText=d.projects;$("mRisks").innerText=d.risks;$("mHigh").innerText=d.high;$("mPending").innerText=d.pending}
+async function loadProjects(){projects=await api("/api/projects");let opts=projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join("");$("inspectProject").innerHTML=opts;$("reportProject").innerHTML=opts;$("projectList").innerHTML=projects.map(p=>`<div class="risk"><b>${p.name}</b><p class="muted">${p.location||"-"}｜${p.category||"-"}｜负责人：${p.owner||"-"}｜状态：${p.status}</p></div>`).join("")||"<p class='muted'>暂无项目。</p>"}
+async function createProject(){if(!$("pname").value)return alert("请输入项目名称");await api("/api/projects",{method:"POST",body:fd({name:$("pname").value,location:$("ploc").value,category:$("pcat").value,owner:$("powner").value})});$("pname").value="";await loadAll()}
+async function uploadInspection(){if(!projects.length)return alert("请先创建项目");let file=$("inspectImage").files[0];if(!file)return alert("请选择照片");let f=new FormData();f.append("project_id",$("inspectProject").value);f.append("title",$("inspectTitle").value||"现场巡检");f.append("mode",$("inspectMode").value);f.append("description",$("inspectDesc").value);f.append("image",file);$("inspectResult").innerHTML="<div class='card'>正在进行AI识别...</div>";let d=await api("/api/inspections",{method:"POST",body:f});let a=d.analysis;$("inspectResult").innerHTML=`<div class="preview"><div class="imgbox"><img src="/${a.annotated_path}"></div><div class="card"><h3>AI引擎：${a.engine}</h3><p class="muted">${a.note||""}</p><h3>综合等级：${a.risk_level}风险</h3>${a.detections.map(x=>`<div class="risk ${x.level}"><b>${x.label}｜${x.level}｜置信度 ${Math.round((x.confidence||0)*100)}%</b><p class="muted">${x.advice}</p></div>`).join("")}<p class="muted">高风险必须人工复核。</p></div></div>`;await loadAll()}
+async function loadInspections(){inspections=await api("/api/inspections");$("inspectionList").innerHTML=inspections.slice(0,8).map(i=>`<div class="risk ${i.risk_level}"><b>#${i.id} ${i.title}｜${i.risk_level}风险｜${i.ai_engine}</b><p class="muted">${i.project_name||""}｜${new Date(i.created_at*1000).toLocaleString()}</p>${i.annotated_path?`<img class="thumb" src="/${i.annotated_path}">`:""}</div>`).join("")||"<p class='muted'>暂无巡检。</p>"}
+async function loadRisks(){risks=await api("/api/risks");$("riskList").innerHTML=risks.map(r=>`<div class="risk ${r.risk_level}"><b>#${r.id} ${r.risk_type}｜${r.risk_level}风险｜置信度 ${Math.round((r.confidence||0)*100)}%｜${r.status}</b><p class="muted">项目：${r.project_name||"-"}<br>建议：${r.advice||"-"}<br>责任人：${r.responsible||"-"}｜期限：${r.deadline||"-"}｜复查：${r.review_result||"-"}</p><div class="grid c4"><select id="s${r.id}"><option>待确认</option><option>待整改</option><option>整改中</option><option>待复查</option><option>已完成</option><option>已驳回</option><option>需专家复核</option><option>已归档</option></select><input id="resp${r.id}" placeholder="责任人" value="${r.responsible||""}"><input id="ddl${r.id}" placeholder="整改期限" value="${r.deadline||""}"><input id="rev${r.id}" placeholder="复查结论" value="${r.review_result||""}"></div><br><button class="btn" onclick="updateRisk(${r.id})">更新隐患单</button><br><br><div class="grid c2"><div><input id="before${r.id}" type="file" accept="image/*"><button class="btn" onclick="uploadRiskPhoto(${r.id},'before')">上传整改前</button>${r.before_path?`<br><img class="thumb" src="/${r.before_path}">`:""}</div><div><input id="after${r.id}" type="file" accept="image/*"><button class="btn g" onclick="uploadRiskPhoto(${r.id},'after')">上传整改后</button>${r.after_path?`<br><img class="thumb" src="/${r.after_path}">`:""}</div></div></div>`).join("")||"<p class='muted'>暂无隐患。</p>"}
+async function updateRisk(id){await api(`/api/risks/${id}/update`,{method:"POST",body:fd({status:$("s"+id).value,responsible:$("resp"+id).value,deadline:$("ddl"+id).value,review_result:$("rev"+id).value,reviewer:me.username})});await loadAll()}
+async function uploadRiskPhoto(id,kind){let inp=$(kind+id);if(!inp.files[0])return alert("请选择照片");let f=new FormData();f.append("kind",kind);f.append("photo",inp.files[0]);await api(`/api/risks/${id}/photo`,{method:"POST",body:f});await loadRisks()}
+function addMsg(t,c){let d=document.createElement("div");d.className="msg "+c;d.innerText=t;$("chat").appendChild(d);$("chat").scrollTop=$("chat").scrollHeight}
+async function ask(){let q=$("q").value.trim();if(!q)return;addMsg(q,"u");$("q").value="";addMsg("AI安全员正在分析...","a");let d=await api("/api/ai-agent",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q,context:{recentRisks:risks.slice(0,8)}})});$("chat").lastChild.innerText=d.answer}
+
+
+function downloadReport(){let id=$("reportProject").value;if(!id)return alert("请先创建项目");window.open(`/api/report/${id}`,"_blank")}
+async function loadLogs(){try{let logs=await api("/api/logs");$("logList").innerHTML="<table><tr><th>用户</th><th>操作</th><th>详情</th><th>时间</th></tr>"+logs.map(l=>`<tr><td>${l.username||"-"}</td><td>${l.action}</td><td>${l.detail||""}</td><td>${new Date(l.created_at*1000).toLocaleString()}</td></tr>`).join("")+"</table>"}catch(e){$("logList").innerHTML="<p class='muted'>当前账号无权限查看日志。</p>"}}
+async function loadUsers(){try{let us=await api("/api/users");$("userList").innerHTML="<table><tr><th>ID</th><th>用户名</th><th>角色</th><th>单位</th><th>电话</th></tr>"+us.map(u=>`<tr><td>${u.id}</td><td>${u.username}</td><td>${u.role}</td><td>${u.org||""}</td><td>${u.phone||""}</td></tr>`).join("")+"</table>"}catch(e){$("userList").innerHTML="<p class='muted'>只有超级管理员可查看用户管理。</p>"}}
+check();
+
+
+
+function fillDemoAbaqus(){
+  $("abType").value="masonry";
+  $("abFloors").value=3;
+  $("abAge").value=32;
+  $("abCrack").value=3.6;
+  $("abLoad").value=1.4;
+  $("abFoundation").value="poor";
+}
+
+function runAbaqusSim(){
+  let type=$("abType").value;
+  let floors=Number($("abFloors").value||1);
+  let age=Number($("abAge").value||0);
+  let crack=Number($("abCrack").value||0);
+  let load=Number($("abLoad").value||1);
+  let foundation=$("abFoundation").value;
+
+  let typeName={
+    masonry:"砖混结构",
+    concrete:"钢筋混凝土结构",
+    steel:"钢结构",
+    wood:"木结构 / 老旧农房"
+  }[type]||"建筑结构";
+
+  let score=18;
+  score += floors*6;
+  score += age>30?26:age>15?13:5;
+  score += crack>3?34:crack>1.5?21:crack>0.5?9:2;
+  score += load>1.3?20:load>1?10:4;
+  score += foundation=="poor"?26:foundation=="normal"?11:2;
+  if(type=="wood") score+=16;
+  if(type=="masonry") score+=10;
+  if(type=="steel") score-=5;
+  score=Math.max(5,Math.min(100,Math.round(score)));
+
+  let level=score>=75?"high":score>=45?"mid":"low";
+  let levelText=score>=75?"高风险":score>=45?"中风险":"低风险";
+
+  let stress=(0.38+score/100*0.72).toFixed(2);
+  let disp=(floors*1.7+crack*2.4+load*3.0+(foundation=="poor"?8.5:foundation=="normal"?3.5:1.2)).toFixed(1);
+  let safety=(2.25-score/100*1.22).toFixed(2);
+
+  let advice = score>=75
+    ? "建议立即暂停相关高风险作业，设置警戒区域；组织安全员、监理或专业工程师复核，重点检查承重墙、梁柱节点、裂缝发展和地基沉降，必要时进行临时支撑、卸载或加固处理。"
+    : score>=45
+    ? "建议限期整改并加强监测，复查裂缝宽度、墙体倾斜、楼板变形和荷载变化；必要时采取局部加固、减少堆载、完善排水和沉降观测。"
+    : "当前风险相对可控，建议纳入常态化巡检台账，定期复查裂缝、沉降和构件变形情况，保持照片留痕和巡检记录。";
+
+  $("abaqusResult").innerHTML=`
+  <div class="preview">
+    <div class="card">
+      <h3>轻量仿真云图预览</h3>
+      <div style="height:270px;border-radius:18px;background:
+        radial-gradient(circle at 72% 28%, rgba(255,64,64,.9), transparent 14%),
+        radial-gradient(circle at 52% 55%, rgba(255,180,60,.85), transparent 22%),
+        radial-gradient(circle at 30% 70%, rgba(61,220,151,.8), transparent 18%),
+        linear-gradient(135deg,#06152a,#0b2b4a 55%,#111827);
+        border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden">
+        <div style="position:absolute;left:28px;top:28px;color:white;font-weight:800">Lightweight Structural Simulation</div>
+        <div style="position:absolute;left:28px;bottom:50px;color:#cbd5e1">红色区域：应力集中 / 黄色区域：变形关注 / 绿色区域：相对安全</div>
+        <div style="position:absolute;right:28px;bottom:28px;color:#fbbf24;font-size:40px;font-weight:900">${score}</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>${typeName}｜结构安全评估</h3>
+      <div class="risk ${level}">
+        <b>综合风险：${levelText}｜风险评分 ${score}/100</b>
+        <p class="muted">系统基于结构类型、建筑年限、裂缝宽度、附加荷载与地基状态进行轻量化结构安全计算。</p>
+      </div>
+      <div class="grid c3">
+        <div class="risk"><b>应力比估算</b><p class="muted">${stress}</p></div>
+        <div class="risk"><b>最大位移估算</b><p class="muted">${disp} mm</p></div>
+        <div class="risk"><b>安全系数估算</b><p class="muted">${safety}</p></div>
+      </div>
+      <h3>智能处置建议</h3>
+      <p class="muted">${advice}</p>
+      <p class="muted">注：本结果用于快速筛查和辅助决策，高风险结构安全问题必须由安全员、监理或专业工程师复核。</p>
+    </div>
+  </div>`;
+}
+
+</script>
+
+
+<!-- QWEN_SIMPLE_BUTTON_START -->
+<script>
+(function(){
+  function isAiInspectionPage(){
+    const text = document.body.innerText || "";
+    const title = document.querySelector("h1, h2, .page-title, .main-title");
+    const titleText = title ? title.innerText : "";
+
+    // 只在 AI巡检 页面显示
+    return (
+      text.includes("AI巡检 / 真实YOLO识别") ||
+      titleText.includes("AI巡检") ||
+      location.hash.includes("inspection") ||
+      location.href.includes("inspection")
+    );
+  }
+
+  function addQwenButton(){
+    let btn = document.getElementById("qwenSimpleBtn");
+
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "qwenSimpleBtn";
+      btn.innerText = "AI辅助研判";
+      btn.style.position = "fixed";
+      btn.style.right = "28px";
+      btn.style.bottom = "28px";
+      btn.style.zIndex = "999999";
+      btn.style.padding = "14px 22px";
+      btn.style.border = "0";
+      btn.style.borderRadius = "16px";
+      btn.style.background = "linear-gradient(135deg,#2563eb,#06b6d4)";
+      btn.style.color = "#fff";
+      btn.style.fontSize = "16px";
+      btn.style.fontWeight = "700";
+      btn.style.boxShadow = "0 12px 30px rgba(37,99,235,.35)";
+      btn.style.cursor = "pointer";
+
+      btn.onclick = async function(){
+        btn.disabled = true;
+        btn.innerText = "研判中...";
+
+        try{
+          const res = await fetch("/api/inspections/latest/qwen-assist", {
+            method:"POST"
+          });
+          const data = await res.json();
+
+          if(!data.ok){
+            alert("千问研判失败：" + (data.message || JSON.stringify(data)));
+            return;
+          }
+
+          if(data.annotated_path){
+            alert("千问研判完成，即将打开标注图");
+            window.location.href = "/" + data.annotated_path;
+          }else{
+            alert("千问研判完成，但没有返回标注图路径");
+          }
+        }catch(e){
+          alert("请求失败：" + e);
+        }finally{
+          btn.disabled = false;
+          btn.innerText = "AI辅助研判";
+        }
+      };
+
+      document.body.appendChild(btn);
+    }
+
+    btn.style.display = isAiInspectionPage() ? "block" : "none";
+  }
+
+  function watchPage(){
+    addQwenButton();
+
+    // 监听页面切换、菜单点击、内容刷新
+    setInterval(addQwenButton, 800);
+
+    document.addEventListener("click", function(){
+      setTimeout(addQwenButton, 300);
+    });
+
+    window.addEventListener("hashchange", addQwenButton);
+    window.addEventListener("popstate", addQwenButton);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", watchPage);
+  }else{
+    watchPage();
+  }
+})();
+</script>
+<!-- QWEN_SIMPLE_BUTTON_END -->
+
+
+
+
+<!-- YZT_FORCE_LOGO_START -->
+<style>
+.yzt-logo-img{
+  width:58px !important;
+  height:58px !important;
+  object-fit:contain !important;
+  border-radius:16px !important;
+  padding:7px !important;
+  background:linear-gradient(135deg,#ffffff,#e8f6ff) !important;
+  box-shadow:0 14px 35px rgba(0,132,255,.32) !important;
+}
+</style>
+
+<script>
+(function(){
+  function forceLogo(){
+    const logoUrl = "/assets/yunzhutianTong_logo_512.png";
+
+    // 找左侧栏里包含“云筑天瞳”的区域
+    const nodes = Array.from(document.querySelectorAll("body *"));
+    let titleNode = nodes.find(el => {
+      const t = (el.innerText || "").trim();
+      return t.includes("云筑天瞳") && t.length <= 30;
+    });
+
+    if(!titleNode) return;
+
+    let box = titleNode;
+    for(let i=0;i<5 && box.parentElement;i++){
+      box = box.parentElement;
+
+      // 找这个区域里最像左上角图标的元素
+      const candidates = Array.from(box.querySelectorAll("img, div, span"));
+      for(const el of candidates){
+        const rect = el.getBoundingClientRect();
+        if(rect.width >= 35 && rect.width <= 90 && rect.height >= 35 && rect.height <= 90){
+          if(el.tagName.toLowerCase() === "img"){
+            el.src = logoUrl;
+            el.classList.add("yzt-logo-img");
+            return;
+          }else{
+            el.innerHTML = "";
+            const img = document.createElement("img");
+            img.src = logoUrl;
+            img.className = "yzt-logo-img";
+            el.appendChild(img);
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  window.addEventListener("load", forceLogo);
+  setTimeout(forceLogo, 300);
+  setTimeout(forceLogo, 1000);
+  setTimeout(forceLogo, 2000);
+})();
+</script>
+<!-- YZT_FORCE_LOGO_END -->
+
+</body></html>

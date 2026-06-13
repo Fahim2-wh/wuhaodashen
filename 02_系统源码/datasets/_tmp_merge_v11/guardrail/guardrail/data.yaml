@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Guardrail']
+
+roboflow:
+  workspace: hs-workspace-1qy7f
+  project: guardrail-vqt3n-jjknf
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/hs-workspace-1qy7f/guardrail-vqt3n-jjknf/1

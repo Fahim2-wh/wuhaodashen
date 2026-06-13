@@ -1,0 +1,19 @@
+path: datasets/site_safety_v10
+train: train/images
+val: valid/images
+test: test/images
+
+names:
+  0: person
+  1: helmet
+  2: vest
+  3: no_helmet
+  4: no_vest
+  5: edge_guardrail
+  6: no_edge_guardrail
+  7: material_stack
+  8: messy_material
+  9: wall_crack
+  10: ground_crack
+  11: scaffold
+  12: warning_sign

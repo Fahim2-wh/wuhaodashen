@@ -1,0 +1,16 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 10
+names:
+  0: helmet
+  1: mask
+  2: no_helmet
+  3: no_mask
+  4: no_vest
+  5: person
+  6: safety_cone
+  7: vest
+  8: machinery
+  9: vehicle

@@ -1,0 +1,10 @@
+fastapi==0.115.6
+uvicorn==0.34.0
+python-multipart==0.0.20
+pillow==11.0.0
+reportlab==4.2.5
+requests==2.32.3
+opencv-python==4.10.0.84
+numpy==2.0.2
+# 可选：真实YOLO推理需要安装，若只做演示可不装
+# ultralytics==8.4.62

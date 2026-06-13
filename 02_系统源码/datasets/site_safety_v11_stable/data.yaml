@@ -1,0 +1,20 @@
+path: /Users/fahim/Desktop/云筑天瞳V9/02_系统源码/datasets/site_safety_v11_stable
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 13
+names:
+  0: helmet
+  1: mask
+  2: no_helmet
+  3: no_mask
+  4: no_vest
+  5: person
+  6: safety_cone
+  7: vest
+  8: machinery
+  9: vehicle
+  10: wall_crack
+  11: material_stack
+  12: edge_guardrail

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 10
+names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+roboflow:
+  workspace: hs-workspace-1qy7f
+  project: construction-site-safety-0gjhe-fvpwl
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/hs-workspace-1qy7f/construction-site-safety-0gjhe-fvpwl/1

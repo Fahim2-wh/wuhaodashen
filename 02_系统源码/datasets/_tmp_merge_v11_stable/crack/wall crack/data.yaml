@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['NewCracks - v2 2024-05-18 10-54pm']
+
+roboflow:
+  workspace: hs-workspace-1qy7f
+  project: wall-crack-p0jqt-dqd1w
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/hs-workspace-1qy7f/wall-crack-p0jqt-dqd1w/1

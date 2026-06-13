@@ -1,0 +1,10 @@
+v9_env/
+venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+*.zip
+*.rar
+*.7z
