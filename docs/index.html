@@ -170,7 +170,74 @@ const tabs=[
 ];
 let projects=[],risks=[],inspections=[],me=null;
 function $(id){return document.getElementById(id)} function fd(o){const f=new FormData();Object.entries(o).forEach(([k,v])=>f.append(k,v));return f}
-async function api(url,opt={}){const r=await fetch(url,opt); if(!r.ok){throw new Error(await r.text())} const ct=r.headers.get("content-type")||""; return ct.includes("json")?r.json():r}
+const DEMO_MODE = location.hostname.includes("github.io");
+const demoData = {
+  user:{username:"admin",role:"超级管理员",org:"云筑天瞳演示中心"},
+  projects:[
+    {id:1,name:"乡村道路安全提升试点项目",location:"河南开封",category:"道路改造",owner:"项目负责人",status:"进行中"},
+    {id:2,name:"村镇房屋结构巡检项目",location:"河南大学实践基地",category:"房屋安全",owner:"安全员",status:"试点演示"}
+  ],
+  inspections:[
+    {id:1,title:"现场巡检演示记录",risk_level:"高",ai_engine:"YOLO + 多模态辅助",project_name:"乡村道路安全提升试点项目",created_at:Date.now()/1000,annotated_path:""}
+  ],
+  risks:[
+    {id:1,risk_type:"临边防护缺失",risk_level:"高",confidence:.92,status:"待整改",project_name:"乡村道路安全提升试点项目",advice:"建议立即设置临边防护栏与警示标识。",responsible:"施工负责人",deadline:"3日内",review_result:"待复查"},
+    {id:2,risk_type:"材料堆放不规范",risk_level:"中",confidence:.81,status:"待确认",project_name:"村镇房屋结构巡检项目",advice:"建议分类堆放并设置安全通道。",responsible:"现场安全员",deadline:"5日内",review_result:"待复查"}
+  ],
+  logs:[
+    {username:"admin",action:"登录系统",detail:"GitHub Pages 前端演示模式",created_at:Date.now()/1000},
+    {username:"admin",action:"AI巡检",detail:"生成隐患识别结果",created_at:Date.now()/1000}
+  ],
+  users:[
+    {id:1,username:"admin",role:"超级管理员",org:"云筑天瞳演示中心",phone:"-"}
+  ]
+};
+
+async function api(url,opt={}){
+  if(DEMO_MODE){
+    if(url.includes("/api/login")) return {user:demoData.user};
+    if(url.includes("/api/me")) return demoData.user;
+    if(url.includes("/api/register")) return {ok:true};
+    if(url.includes("/api/system")) return {
+      demo_mode:true,
+      yolo_installed:true,
+      site_model_exists:true,
+      deepseek_configured:false,
+      site_model:"GitHub Pages 前端演示模式"
+    };
+    if(url.includes("/api/dashboard")) return {
+      projects:demoData.projects.length,
+      risks:demoData.risks.length,
+      high:demoData.risks.filter(r=>r.risk_level==="高").length,
+      pending:demoData.risks.filter(r=>r.status!=="已完成").length
+    };
+    if(url.includes("/api/projects")){
+      if(opt.method==="POST"){
+        demoData.projects.push({id:demoData.projects.length+1,name:"新增演示项目",location:"演示地点",category:"安全巡检",owner:"负责人",status:"进行中"});
+      }
+      return demoData.projects;
+    }
+    if(url.includes("/api/inspections/latest/qwen-assist")) return {answer:"已生成千问辅助分析建议：建议重点关注高风险隐患闭环整改。"};
+    if(url.includes("/api/inspections")){
+      if(opt.method==="POST"){
+        return {analysis:{engine:"GitHub Pages 演示AI引擎",note:"当前为前端演示模式，完整识别需连接后端服务。",risk_level:"高",annotated_path:"",detections:[
+          {label:"临边防护缺失",level:"高",confidence:.92,advice:"立即设置防护栏与警示标识。"},
+          {label:"材料堆放不规范",level:"中",confidence:.81,advice:"清理通道并分类堆放。"}
+        ]}};
+      }
+      return demoData.inspections;
+    }
+    if(url.includes("/api/risks")) return demoData.risks;
+    if(url.includes("/api/ai-agent")) return {answer:"AI安全员建议：优先处理高风险隐患，形成发现、派单、整改、复查、归档的闭环管理。"};
+    if(url.includes("/api/logs")) return demoData.logs;
+    if(url.includes("/api/users")) return demoData.users;
+    return {};
+  }
+  const r=await fetch(url,opt);
+  if(!r.ok){throw new Error(await r.text())}
+  const ct=r.headers.get("content-type")||"";
+  return ct.includes("json")?r.json():r
+}
 function toggleReg(v){$("regBox").classList.toggle("hide",!v);$("loginBox").classList.toggle("hide",v)}
 async function register(){try{await api("/api/register",{method:"POST",body:fd({username:$("ru").value,password:$("rp").value,role:$("rr").value,org:$("ro").value,phone:$("rphone").value})});alert("注册成功，请登录");toggleReg(false)}catch(e){alert(e.message)}}
 async function login(){try{let d=await api("/api/login",{method:"POST",body:fd({username:$("lu").value||"admin",password:$("lp").value||"admin123456"})});me=d.user;showApp()}catch(e){alert("登录失败："+e.message)}}
